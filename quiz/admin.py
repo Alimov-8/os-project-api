@@ -7,10 +7,13 @@ from quiz.models import Quiz, Question, Subject
 
 class QuizInline(admin.TabularInline):
     model = Quiz
+    extra = 1
 
 
 class QuestionInline(admin.TabularInline):
     model = Question
+    extra = 1
+    fields = ('question', 'choice_1', 'choice_2', 'choice_3', 'correct_answer')
 
 
 @admin.register(Subject)

@@ -31,7 +31,6 @@ class Question(models.Model):
     choice_1 = models.CharField(max_length=255, null=True, unique=True)
     choice_2 = models.CharField(max_length=255, null=True, unique=True)
     choice_3 = models.CharField(max_length=255, null=True, unique=True)
-    choice_4 = models.CharField(max_length=255, null=True, unique=True)
     correct_answer = models.IntegerField(choices=RATE_CHOICES, null=True)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='quistion')
 
