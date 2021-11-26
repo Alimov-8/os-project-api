@@ -10,8 +10,8 @@ router.register(r'quizzes', QuizViewSet)
 router.register(r'questions', QuestionViewSet)
 
 urlpatterns = [
-    path('subjects/<int:subject_id>/quizzes', views.get_subject_quizzes, name='subject-quizzes'),
-    path('subjects/<int:subject_id>/quizzes/<int:quiz_id>/questions', views.get_quiz_questions, name='quiz-questions'),
+    path('subjects/<int:subject_id>/quizzes/', views.get_subject_quizzes, name='subject-quizzes'),
+    path('subjects/<int:subject_id>/quizzes/<int:quiz_id>/questions/', views.get_quiz_questions, name='quiz-questions'),
 
 ]
 

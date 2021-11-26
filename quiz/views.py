@@ -46,7 +46,7 @@ def get_quiz_questions(request, subject_id, quiz_id):
     Returns the questions for the particular quiz, with its ID
     """
     if request.method == 'GET':
-        questions = Question.objects.all().filter(quiz=quiz_id).values()
+        questions = Question.objects.filter(quiz=quiz_id).values()
         return JsonResponse({'questions': list(questions)})
 
 # 127.0.0.1:8000/subjects/2/quizzes/3/questions
