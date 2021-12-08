@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.admin import ModelAdmin
 from django.contrib.admin import AdminSite
 from django.utils.translation import ugettext_lazy
-from quiz.models import Quiz, Question, Subject
+from quiz.models import Quiz, Question, Subject, Choice
 
 
 class QuizInline(admin.TabularInline):
@@ -13,14 +13,18 @@ class QuizInline(admin.TabularInline):
 class QuestionInline(admin.TabularInline):
     model = Question
     extra = 1
-    fields = ('question', 'choice_1', 'choice_2', 'choice_3', 'correct_answer')
+    
+    
+class ChoiceInline(admin.TabularInline):
+    model = Choice
+    extra = 1
 
 
 @admin.register(Subject)
 class SubjectAdmin(ModelAdmin):
     list_display = [
-        'id',
         'name',
+        'id',
     ]
 
     inlines = [
@@ -28,20 +32,24 @@ class SubjectAdmin(ModelAdmin):
     ]
 
 
-@admin.register(Quiz)
-class QuizAdmin(ModelAdmin):
+# @admin.register(Quiz)
+# class QuizAdmin(ModelAdmin):
+#     list_display = [
+#         'name',
+#         'subject',
+#         'id',
+#     ]
+
+
+@admin.register(Question)
+class QuestionAdmin(ModelAdmin):
     list_display = [
+        'question',
+        'quiz',
         'id',
-        'name',
-        'subject',
     ]
 
     inlines = [
-        QuestionInline,
+        ChoiceInline,
     ]
-
-
-# @admin.register(Question)
-# class QuestionAdmin(ModelAdmin):
-#     pass
 
