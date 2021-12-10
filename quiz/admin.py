@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.admin import ModelAdmin
 from django.contrib.admin import AdminSite
 from django.utils.translation import ugettext_lazy
-from quiz.models import Quiz, Question, Subject, Choice
+from quiz.models import Quiz, Question, Subject, Choice, Results
 
 
 class QuizInline(admin.TabularInline):
@@ -53,3 +53,12 @@ class QuestionAdmin(ModelAdmin):
         ChoiceInline,
     ]
 
+
+@admin.register(Results)
+class ResultsAdmin(ModelAdmin):
+    list_display = [
+        'subject',
+        'quiz',
+        'username',
+        'score',
+    ]

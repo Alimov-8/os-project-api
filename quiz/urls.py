@@ -12,7 +12,8 @@ router.register(r'questions', QuestionViewSet)
 urlpatterns = [
     path('subjects/<int:subject_id>/quizzes/', views.get_subject_quizzes, name='subject-quizzes'),
     path('subjects/<int:subject_id>/quizzes/<int:quiz_id>/questions/', views.get_quiz_questions, name='quiz-questions'),
-
+    path('<subject>/<quiz>/<username>/<score>/add/', views.add_user_score, name='add-score'),
+    path('<subject>/<quiz>/all/results/', views.all_results, name='all-results'),
 ]
 
 urlpatterns += router.urls
