@@ -4,7 +4,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from quiz.models import Subject, Quiz, Question
+from quiz.models import Subject, Quiz, Question, Results
 from .serializers import (
     SubjectSerializer,
     QuizSerializer,
@@ -89,3 +89,37 @@ def get_quiz_questions(request, subject_id, quiz_id):
     ]
 }
 """
+
+
+@api_view(['GET'])
+def add_user_score(request, subject, quiz, username, score):
+    """
+    Stores the values into Stident Model and returuns the status
+    """
+    if request.method == 'GET':
+        
+        if subject and quiz and username and score:
+            Results.objects.create(
+                subject=subject,
+                quiz=quiz,
+                username=username,
+                score=score,
+            )
+            return Response({'status': 'True',})
+
+        return Response({'status': 'False',})
+
+
+# http://iutquiz.pythonanywhere.com/History/quiz1/username/score/add
+
+
+
+@api_view(['GET'])
+def all_results(request, subject, quiz):
+    if request.method == 'GET':
+        if Results.objects.filter(subject=subject, quiz=quiz):
+            results = Results.objects.filter(subject=subject, quiz=quiz).values()
+            return Response({'Results': list(results)})
+        return Response({'status': 'False',})
+    
+# http://iutquiz.pythonanywhere.com/history/quiz1/all/results

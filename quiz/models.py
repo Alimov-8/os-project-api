@@ -48,3 +48,17 @@ class Choice(models.Model):
     def __str__(self):
         return self.choice
 
+
+class Results(models.Model):
+    subject = models.CharField(max_length=255)
+    quiz = models.CharField(max_length=255)
+    username = models.CharField(max_length=255)
+    score = models.CharField(max_length=255)
+    
+    def __str__(self):
+        return f'self.username, self.score'
+    
+    class Meta:
+        verbose_name = 'Result'
+        verbose_name_plural = 'Results'
+    
